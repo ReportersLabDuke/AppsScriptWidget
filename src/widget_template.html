@@ -1,0 +1,60 @@
+<div class="factbox">
+  <script>
+    function showEmbedBox(e) {
+    var target = e;
+    factbox = target.parentNode.parentNode;
+    embed_box = factbox.getElementsByClassName('embed-box')[0];
+    embed_box.style.display = 'block';
+    var container = document.createElement("div");
+    container.appendChild(factbox.cloneNode(true));
+    embed_box.getElementsByTagName("textarea")[0].innerHTML = container.innerHTML;
+    }
+  </script>
+  <link rel="stylesheet" href="http://colab-sbx-285.oit.duke.edu/fact-widget/fact_style.css">
+  <div class="left-box container">
+    <img class="image logo" src="<?=logo_image?>"alt="Rater"/>
+    <img class="image speaker" src="<?=speaker_image?>" alt="Speaker">
+  </div>
+  <div class="fact container"> 
+    <div class="fact-text"><a href="<?=link?>"><?=title?></a></div>
+    <div class="fact-speaker"><?=speaker?></div>
+    <div class="fact-rating"><?!=rating_text_with_label?></div>
+  </div>
+  <div class="right-box container"><?!=rating_summary?><a class="subtext" href="#" onclick="showEmbedBox(this)">embed this</a></div>
+  <div class="embed-box">
+    <p>Copy and paste this embed code into your site:</p>
+    <textarea rows="4" cols="50"></textarea>
+  </div>
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": ["Review", "ClaimReview"],
+  "datePublished": "<?=date?>", 
+  "url": "<?!=link?>",
+  "author": { 
+  "@type": "Organization", 
+  "url": "<?!=org_url?>" 
+  },
+  "claimReviewed": "<?!=fact?>",
+  "claimReviewSiteLogo": "<?!=logo_image?>",
+  "reviewRating": {
+  "@type": "Rating",
+  "ratingValue": <?=rating_num?>,
+  "bestRating": <?=max_rating?>,
+  },
+  "itemReviewed": {
+  "@type": "CreativeWork",
+  "author": {
+  "@type": "Person",
+  "name": "<?=speaker?>",
+  "image": "<?!=speaker_image?>",
+  "sameAs": {  [<?=speaker_context?>] },
+  "datePublished": "<?!=fact_date?>"
+  }
+  }
+  </script>
+</div>
+
+
+
+
