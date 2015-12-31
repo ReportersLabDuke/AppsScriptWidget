@@ -13,9 +13,10 @@ function onOpen(e) {
 
 function createWidget() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet();
+  var orgSheet = sheet.getSheetByName('org_info')
 
   var row = sheet.getActiveCell().getRow();
-  var org_values = sheet.getSheetValues(2, 14, 1, 3);
+  var org_values = orgSheet.getSheetValues(2, 1, 1, 3);
   var values = sheet.getSheetValues(row, 1, 1, 14);
   
   var t = HtmlService.createTemplateFromFile('widget_template');
