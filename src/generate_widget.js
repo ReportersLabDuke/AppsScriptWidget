@@ -32,12 +32,13 @@ function createWidget() {
   t.fact = values[0][1];
   t.fact_date = values[0][2];
   
-  rating_number = values[0][7];
-  
-  rating_text = values[0][9].toString().toUpperCase();
+  // TODO: could we do the surrounding quotes in CSS?
+  t.rating_text = '"' + values[0][9] + '"';
+
   rating_description = values[0][8];
   rating_image = values[0][10];
   
+  rating_number = values[0][7];
   if (rating_number != null && rating_number > 0) {
     t.rating_num = rating_number;
   }
@@ -45,17 +46,14 @@ function createWidget() {
     t.rating_num = -1;
   }
   
-  if (rating_text != "") {
-    r1= '<h2>Rating: ' + rating_text + '<\/h2>';
-    r2= '<img src=\"' + rating_image + '\" alt=\"Rating\">';
-    t.rating_text_with_label = '<h2>Rating: ' + rating_text + '<\/h2>';
-    t.rating_summary = '<img src=\"' + rating_image + '\" alt=\"Rating\">';
+  // Organisation image plus, if available, rating image.
+  // Goes in the top right-hand corner.
+  // TODO: use rating_description when no rating_image specified?
+  if (rating_image != "") {
+    t.rating_summary = '<img src="' + rating_image + '"><img src="' + t.logo_image + '">';
+  } else {
+    t.rating_summary = '<img src="' + t.logo_image + '">';
   }
-  else if (rating_description != "") {
-    t.rating_summary = '<h3>Rating: ' + rating_description + '<\/h3>';
-    t.rating_text_with_label = '';
-  }
-  else { t.rating_text_with_label = ''; t.rating_summary = values[0][11]; }
   
   output = t.evaluate().getContent();
   
