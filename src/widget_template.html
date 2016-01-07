@@ -1,30 +1,308 @@
 <div class="factbox">
+  <style>
+  html, body {
+    font-family: 'Roboto', 'Helvetica', sans-serif;
+    font-color: rgba(0, 0, 0, 0.87);
+    margin: 0px;
+    margin-top:40px;
+    padding: 0;
+    background-color:#f5f5f5;
+  }
+
+  .factbox {
+    padding:32px;
+    padding-bottom:24px;
+    display: block;
+    margin: auto;
+    margin:0 auto;
+    background-color: #ffffff;
+    width:75%;
+    height:auto;
+    max-width:600px;
+    min-width:260px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+    position: relative;
+  }
+
+  .name img {
+    float:left;
+    padding:0px 32px 32px 0px;
+  }
+
+  .name {
+    height:64px;
+    float:left;
+  }
+
+  .rating {
+    padding-left:32px;
+    float: right;
+    width:120px;
+    height:auto;
+    display: inline;
+  }
+
+  .rating img {
+    width: 100%;
+    padding-bottom:24px;
+  }
+
+  h1 {
+    display: inline-block;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.35em;
+    -webkit-margin-before: .35em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+  }
+
+  p {
+    text-indent: -0.35em;
+    margin-top: 86px;
+    /* clear: both; */
+    width: 100%;
+    display: block;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  hr {
+    border-bottom: 1px; 
+    border-left: 0px; 
+    border-right: 0px; 
+    border-top: 0px; 
+    border-style:solid;
+    border-color:#e0e0e0;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .links {
+    display:block;
+    padding-top: 20px;
+  }
+
+  a:-webkit-any-link {
+    font-color: #2196f3;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .links a {
+    margin-right: 32px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #2196f3;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .links a:hover {
+    cursor: pointer;
+  }
+
+  a :hover {
+   cursor: pointer;
+  }
+
+  ul {
+    padding-left: 0px;
+    display:block;
+    padding-top: 10px;
+    padding-bottom: 0px;
+  }
+
+  li {
+    display: inline;
+    margin-right: 32px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #2196f3;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  li a {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #2196f3;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  li a:visited {
+    color: #2196f3;
+  }
+
+  .menu .share { 
+    display: none;
+  }
+
+  .share .embed_box { 
+    display: none;
+  }
+
+  .menu li {
+    color: rgba(0, 0, 0, 0.87);
+    text-transform: none;
+    cursor: default;
+    display: inline;
+  }
+
+  .menu li span {
+    margin-right: 0px;
+  }
+
+  .menu li img {
+    width: 100%;
+    display: -webkit-flex;
+    display: flex;
+  }   
+
+  .menu ul.dropit-submenu  {
+    padding-top:32px;
+    width: 100%;
+  }
+
+  .menu ul.dropit-submenu a {
+    font-size: 14px;
+    line-height: 25px;
+    padding: 0 18px;
+  }
+
+  a {
+    color: #2196f3;
+  }
+
+  @media screen and (max-width: 560px) {
+    .rating {
+      padding-left: 24px;
+      float: right;
+      width: 100px;
+      height: auto;
+      display: inline;
+    }
+    .name {
+      padding-bottom: 32px;
+    }
+    p {
+    clear: left;
+    }
+  }
+
+  @media screen and (max-width: 460px) {
+    .rating {
+      padding-left: 24px;
+      float: right;
+      width: 90px;
+      height: auto;
+      display: inline;
+    }
+    .name {
+      width: 100%;
+      padding-bottom: 32px;
+    }
+    p {
+      font-size: 13px;
+      line-height: 22px;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .factbox {
+      padding: 24px;
+      display: block;
+      margin: auto;
+      margin: 0 auto;
+      background-color: #ffffff;
+      width: 75%;
+      height: auto;
+      max-width: 600px;
+      min-width: 260px;
+      box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+      position: relative;
+    }
+    .rating {
+      padding-left: 24px;
+      float: right;
+      width: 90px;
+      height: auto;
+      display: inline;
+    }
+    .name {
+      height: 64px;
+      float: left;
+    }
+    .name img {
+      float: left;
+      padding: 0px 24px 24px 0px;
+    }
+    h1 {
+      display: inline-block;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 1.35em;
+      -webkit-margin-before: .35em;
+      -webkit-margin-after: 0em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+    }
+    p {
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
+  </style>
+
   <script>
     function showEmbedBox(e) {
-    var target = e;
-    factbox = target.parentNode.parentNode;
-    embed_box = factbox.getElementsByClassName('embed-box')[0];
-    embed_box.style.display = 'block';
-    var container = document.createElement("div");
-    container.appendChild(factbox.cloneNode(true));
-    embed_box.getElementsByTagName("textarea")[0].innerHTML = container.innerHTML;
+      var factbox = e;
+      while (!factbox.classList.contains('factbox')) {
+        factbox = factbox.parentElement;
+      }
+
+      var container = document.createElement("div");
+      container.appendChild(factbox.cloneNode(true));
+      var embed_box = e.parentElement.getElementsByClassName('embed_box')[0];
+      embed_box.innerHTML = container.innerHTML;
+      embed_box.style.display = 'block';
+    }
+
+    function toggleShareVisibility(e) {
+      var e = e.parentElement.getElementsByClassName('share')[0];
+      if (e.style.display === 'block') {
+        e.style.display = 'none';
+      } else {
+       e.style.display = 'block';
+      }
     }
   </script>
-  <link rel="stylesheet" href="http://colab-sbx-285.oit.duke.edu/fact-widget/fact_style.css">
-  <div class="left-box container">
-    <img class="image logo" src="<?=logo_image?>"alt="Rater"/>
-    <img class="image speaker" src="<?=speaker_image?>" alt="Speaker">
+
+  <div class="name">
+    <img src="<?=speaker_image?>">
+    <h1><?=speaker?></h1>
   </div>
-  <div class="fact container"> 
-    <div class="fact-text"><a href="<?=link?>"><?=title?></a></div>
-    <div class="fact-speaker"><?=speaker?></div>
-    <div class="fact-rating"><?!=rating_text_with_label?></div>
+  <div class="rating">
+    <?!=rating_summary?>
   </div>
-  <div class="right-box container"><?!=rating_summary?><a class="subtext" href="#" onclick="showEmbedBox(this)">embed this</a></div>
-  <div class="embed-box">
-    <p>Copy and paste this embed code into your site:</p>
-    <textarea rows="4" cols="50"></textarea>
-  </div>
+
+  <p><?!=rating_text?></p>
+ 
+  <ul class="menu">
+    <li><a href="#">Read more</a></li>
+    <li><a href="#" onclick='toggleShareVisibility(this)'>Share</a>
+      <ul class="share">
+        <li>Facebook</li>
+        <li>Google+</li>
+        <li>Twitter</li>
+        <li><a href="#" onclick="showEmbedBox(this)">Embed</a><textarea rows="4" cols="50" class="embed_box"></textarea></li>
+      </ul>
+    </li>
+  </ul>
+
   <script type="application/ld+json">
   {
   "@context": "http://schema.org",
@@ -54,7 +332,3 @@
   }
   </script>
 </div>
-
-
-
-
