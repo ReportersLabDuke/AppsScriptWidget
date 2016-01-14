@@ -20,6 +20,7 @@ function createWidget() {
   var values = sheet.getSheetValues(row, 1, 1, 14);
   
   var t = HtmlService.createTemplateFromFile('widget_template');
+  t.stype = 'application/ld+json';
   t.org_url = org_values[0][2];
   t.logo_image = org_values[0][1];
   t.max_rating = org_values[0][0];
@@ -32,8 +33,9 @@ function createWidget() {
   t.fact = values[0][1];
   t.fact_date = values[0][2];
   
-  // TODO: could we do the surrounding quotes in CSS?
-  t.rating_text = '"' + values[0][9] + '"';
+    // TODO: could we do the surrounding quotes in CSS?
+  rating_text = values[0][9]
+  t.rating_text = values[0][9];
 
   rating_description = values[0][8];
   rating_image = values[0][10];
@@ -51,8 +53,11 @@ function createWidget() {
   // TODO: use rating_description when no rating_image specified?
   if (rating_image != "") {
     t.rating_summary = '<img src="' + rating_image + '"><img src="' + t.logo_image + '">';
-  } else {
-    t.rating_summary = '<img src="' + t.logo_image + '">';
+  } else if (rating_text != "") {
+      t.rating_summary = '<b>Rating:</b> ' + rating_text + '<img src="' + t.logo_image + '">'
+  }
+  else {
+      t.rating_summary = '<b>Rating:</b> ' + rating_description + '<img src="' + t.logo_image + '">';
   }
   
   output = t.evaluate().getContent();

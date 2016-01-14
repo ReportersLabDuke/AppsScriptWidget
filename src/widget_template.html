@@ -280,6 +280,7 @@
       }
     }
   </script>
+  <script async src="//static.addtoany.com/menu/page.js"></script>
 
   <div class="name">
     <img src="<?=speaker_image?>">
@@ -289,25 +290,31 @@
     <?!=rating_summary?>
   </div>
 
-  <p><?!=rating_text?></p>
+  <p><?!=fact?></p>
  
   <ul class="menu">
-    <li><a href="#">Read more</a></li>
+    <li><a href="<?!=link?>">Read more</a></li>
     <li><a href="#" onclick='toggleShareVisibility(this)'>Share</a>
       <ul class="share">
-        <li>Facebook</li>
-        <li>Google+</li>
-        <li>Twitter</li>
+          <li>
+              <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="<?!=link?>" data-a2a-title="<?=speaker?>">
+                  <a class="a2a_button_facebook"></a>
+                  <a class="a2a_button_twitter"></a>
+                  <a class="a2a_button_google_plus"></a>
+                  <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+              </div>
+          </li>
         <li><a href="#" onclick="showEmbedBox(this)">Embed</a><textarea rows="4" cols="50" class="embed_box"></textarea></li>
       </ul>
     </li>
   </ul>
 
-  <script type="application/ld+json">
+  <script type="<?!=stype?>">
   {
   "@context": "http://schema.org",
-  "@type": ["Review", "ClaimReview"],
-  "datePublished": "<?=date?>", 
+  "@type":"Review",
+  "additionalType":"ClaimReview",
+  "datePublished": "<?!=date?>", 
   "url": "<?!=link?>",
   "author": { 
   "@type": "Organization", 
@@ -326,7 +333,7 @@
   "@type": "Person",
   "name": "<?=speaker?>",
   "image": "<?!=speaker_image?>",
-  "sameAs": {  [<?=speaker_context?>] },
+  "sameAs": "<?!=speaker_context?>",
   "datePublished": "<?!=fact_date?>"
   }
   }
