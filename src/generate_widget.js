@@ -71,3 +71,22 @@ function createWidget() {
   SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
       .showModalDialog(html_out, 'Widget Embed Code');
 }
+
+function createShareableImage(){
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "https://fact-reporter.herokuapp.com/generate?statement=Canadian-born%20Ted%20Cruz%20%22has%20had%20a%20double%20passport.%22&speaker=Donald%20Trump&image=http://static.politifact.com.s3.amazonaws.com/politifact%2Fmugs%2Ftrump_1.jpg&rating=1", true);
+  xhr.onload = function (e) {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        console.log(xhr.responseText);
+      } else {
+        console.error(xhr.statusText);
+      }
+    }
+  };
+  xhr.onerror = function (e) {
+    console.error(xhr.statusText);
+  };
+  xhr.send(null);
+
+}
