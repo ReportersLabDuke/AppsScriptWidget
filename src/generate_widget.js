@@ -60,6 +60,8 @@ function createWidget() {
       t.rating_summary = '<b>Rating:</b> ' + rating_description + '<img src="' + t.logo_image + '">';
   }
   
+  t.shareable_image = getShareableImage(t.speaker, t.title, t.speaker_image, rating_image).image_url;
+
   output = t.evaluate().getContent();
   
   var html = HtmlService.createTemplateFromFile('menu_template');
@@ -72,21 +74,19 @@ function createWidget() {
       .showModalDialog(html_out, 'Widget Embed Code');
 }
 
-function createShareableImage(){
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", "https://fact-reporter.herokuapp.com/generate?statement=Canadian-born%20Ted%20Cruz%20%22has%20had%20a%20double%20passport.%22&speaker=Donald%20Trump&image=http://static.politifact.com.s3.amazonaws.com/politifact%2Fmugs%2Ftrump_1.jpg&rating=1", true);
-  xhr.onload = function (e) {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        console.log(xhr.responseText);
-      } else {
-        console.error(xhr.statusText);
-      }
-    }
-  };
-  xhr.onerror = function (e) {
-    console.error(xhr.statusText);
-  };
-  xhr.send(null);
+function testGetShareableImage(){
+  getShareableImage("Martin O'Malley", "this is a \"fake\" test", "http://static.politifact.com.s3.amazonaws.com/politifact%2Fmugs%2Ftrump_1.jpg", "http://static.politifact.com.s3.amazonaws.com/rulings%2Ftom-pantsonfire.gif");
+}
 
+function getShareableImage(speaker, statement, speakerImage, ratingImage){
+  var encodedSpeaker = encodeURIComponent(speaker);
+  var encodedStatement = encodeURIComponent(statement);
+  var encodedSpeakerImage = encodeURIComponent(speakerImage);
+  var encodedRatingImage = encodeURIComponent(ratingImage);
+  
+  var url = "https://fact-reporter.herokuapp.com/generate?statement="+encodedStatement+"&speaker="+encodedSpeaker+"&speaker-image="+encodedSpeakerImage+"&rating-image="+encodedRatingImage;
+  Logger.log(url);
+  var response = UrlFetchApp.fetch(url);
+  var responseText = response.getContentText();
+  return JSON.parse(response.getContentText());
 }
