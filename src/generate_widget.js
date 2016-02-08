@@ -90,3 +90,5 @@ function getShareableImage(speaker, statement, speakerImage, ratingImage){
   var responseText = response.getContentText();
   return JSON.parse(response.getContentText());
 }
+
+//testing the push capabilities
