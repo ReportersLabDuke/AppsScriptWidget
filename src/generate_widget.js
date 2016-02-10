@@ -121,7 +121,7 @@ function getShareableImage(speaker, statement, speakerImage, ratingImage){
   var url = "https://fact-reporter.herokuapp.com/generate";
   var options = {
     "method": "post",
-    "payload": payload
+    "payload": JSON.stringify(payload)
   }
   
   Logger.log(url);
