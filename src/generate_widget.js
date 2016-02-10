@@ -84,10 +84,48 @@ function getShareableImage(speaker, statement, speakerImage, ratingImage){
   var encodedSpeakerImage = encodeURIComponent(speakerImage);
   var encodedRatingImage = encodeURIComponent(ratingImage);
   
+  var payload = {
+      "@context": "http://schema.org",
+      "@type": ["Review", "ClaimReview"],
+      "datePublished": "2014-07-23",
+      "url": "http://www.politifact.com/texas/statements/2014/jul/23/rick-perry/rick-perry-claim-about-3000-homicides-illegal-immi/",
+      "author": {
+        "@type": "Organization",
+        "url": "http://www.politifact.com/"
+      },
+      "claimReviewed": "More than 3,000 homicides were committed by \"illegal aliens\" over the past six years.",
+      "claimReviewSiteLogo": "http://static.politifact.com/mediapage/jpgs/politifact-logo-big.jpg",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 1,
+        "bestRating": 6,
+        "image": "http://static.politifact.com.s3.amazonaws.com/rulings/tom-pantsonfire.gif"
+      },
+      "itemReviewed": {
+        "@type": "CreativeWork",
+        "author": {
+          "@type": "Person",
+          "name": "Rich Perry",
+          "title": "Former Governor of Texas",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Gov._Perry_CPAC_February_2015.jpg/440px-Gov._Perry_CPAC_February_2015.jpg",
+          "sameAs": [
+            "https://en.wikipedia.org/wiki/Rick_Perry",
+            "https://rickperry.org/"
+          ]
+        },
+        "datePublished": "2014-07-17",
+        "sourceName": "The St. Petersburg Times"
+      }
+    }
+  
   var url = "https://fact-reporter.herokuapp.com/generate?statement="+encodedStatement+"&speaker="+encodedSpeaker+"&speaker-image="+encodedSpeakerImage+"&rating-image="+encodedRatingImage;
+  var options = {
+    "method": "post",
+    "payload": payload
+  }
+  
   Logger.log(url);
-  var response = UrlFetchApp.fetch(url);
+  var response = UrlFetchApp.fetch(url, options);
   var responseText = response.getContentText();
   return JSON.parse(response.getContentText());
 }
-
