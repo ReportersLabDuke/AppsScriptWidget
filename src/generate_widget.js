@@ -12,43 +12,67 @@ function onOpen(e) {
 }
 
 function createWidget() {
+  // Retreive the spreadsheet currently open
+  // Everything will break unless "Sheet1" is open, which contains the facts
   var sheet = SpreadsheetApp.getActiveSpreadsheet();
+  // Go to the second sheet, which contains the various organizations' info
   var orgSheet = sheet.getSheetByName('org_info')
 
+  //This gets all the cells of the fact selected
   var row = sheet.getActiveCell().getRow();
+  // This, for now, defaults to the top organization in "org_info"
   var org_values = orgSheet.getSheetValues(2, 1, 1, 3);
+  // Get the values for the selected fact
   var values = sheet.getSheetValues(row, 1, 1, 14);
   
+  // Create the widget from the "widget_template.html" file
   var t = HtmlService.createTemplateFromFile('widget_template');
+  // No idea what this is
   t.stype = 'application/ld+json';
-  t.org_url = org_values[0][2];
-  t.logo_image = org_values[0][1];
-  t.max_rating = org_values[0][0];
-  t.speaker_image = values[0][5];
-  t.title = values[0][1];
-  t.speaker = values[0][3];
-  t.speaker_context = values[0][6];
-  t.link = values[0][11];
-  t.date = values[0][12];
-  t.fact = values[0][1];
-  t.fact_date = values[0][2];
   
-    // TODO: could we do the surrounding quotes in CSS?
+  // "org_info" page, "OrgURL" column
+  t.org_url = org_values[0][2];
+  // "org_info" page, "LogoImage" column
+  t.logo_image = org_values[0][1];
+  // "org_info" page, "MaxRating" column
+  t.max_rating = org_values[0][0];
+  // "Sheet1" page, "SpeakerImage" column
+  t.speaker_image = values[0][5];
+  // "Sheet1" page, "Statement" column  
+  t.title = values[0][1];
+  // "Sheet1" page, "Speaker" column  
+  t.speaker = values[0][3];
+  // "Sheet1" page, "InfoSource" column  
+  t.speaker_context = values[0][6];
+  // "Sheet1" page, "Link" column  
+  t.link = values[0][11];
+  // "Sheet1" page, "PubDate" column  
+  t.date = values[0][12];
+  // "Sheet1" page, "Statement" column (again?)  
+  t.fact = values[0][1];
+  // "Sheet1" page, "Date" column  
+  t.fact_date = values[0][2];
+  // "Sheet1" page, "RatingText" column...twice
   rating_text = values[0][9]
   t.rating_text = values[0][9];
-
+  // "Sheet1" page, "RatingDescription" column  
   rating_description = values[0][8];
+  // "Sheet1" page, "RatingImage" column    
   rating_image = values[0][10];
-  
+  // "Sheet1" page, "Rating" column    
   rating_number = values[0][7];
+  
+  // Check to make sure the rating is not higher than the most allowed
+  // by the organization
   if (rating_number != null && rating_number > 0) {
     t.rating_num = rating_number;
   }
   else {
+    // This should probably fail spectacularly instead of random number
     t.rating_num = -1;
   }
   
-  // Organisation image plus, if available, rating image.
+  // Organization image plus, if available, rating image.
   // Goes in the top right-hand corner.
   // TODO: use rating_description when no rating_image specified?
   if (rating_image != "") {
@@ -60,16 +84,21 @@ function createWidget() {
       t.rating_summary = '<b>Rating:</b> ' + rating_description + '<img src="' + t.logo_image + '">';
   }
   
-  t.shareable_image = getShareableImage(t.speaker, t.title, t.speaker_image, rating_image).image_url;
+  // Get the shareable image for the sharing links
+  //t.shareable_image = getShareableImage(t.speaker, t.title, t.speaker_image, rating_image).image_url;
 
+  // Get the final HTML
   output = t.evaluate().getContent();
   
+  // Make the box to show the code for embedding
   var html = HtmlService.createTemplateFromFile('menu_template');
   html.div_html = output;
   var html_out = html.evaluate()
       .setSandboxMode(HtmlService.SandboxMode.IFRAME)
       .setWidth(400)
       .setHeight(300);
+      
+  // Show the view on the screen
   SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
       .showModalDialog(html_out, 'Widget Embed Code');
 }
@@ -124,8 +153,9 @@ function getShareableImage(speaker, statement, speakerImage, ratingImage){
     "payload": JSON.stringify(payload)
   }
   
-  Logger.log(url);
   var response = UrlFetchApp.fetch(url, options);
   var responseText = response.getContentText();
+  Logger.log(responseText);
+
   return JSON.parse(response.getContentText());
 }
