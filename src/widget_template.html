@@ -386,14 +386,14 @@
       openShare('http://www.facebook.com/sharer.php?app_id=612033658951055&u=' + url + '&picture=' + picture, winWidth, winHeight);
     }
     
-    function twitterShare(url, widWidth, winHeight){
+    function twitterShare(url, winWidth, winHeight){
       openShare('https://twitter.com/intent/tweet?url=' + url, winWidth, winHeight);
     }
     
     function openShare(url, winWidth, winHeight){
       var winTop = (screen.height / 2) - (winHeight / 2);
       var winLeft = (screen.width / 2) - (winWidth / 2);
-      window.open('http://www.facebook.com/sharer.php?app_id=612033658951055&u=' + url + '&picture=' + picture, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+      window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
     }
 
   </script>
