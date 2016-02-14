@@ -18,12 +18,13 @@ function createWidget() {
   // Go to the second sheet, which contains the various organizations' info
   var orgSheet = sheet.getSheetByName('org_info')
 
-  //This gets all the cells of the fact selected
+  // This gets all the cells of the fact selected
   var row = sheet.getActiveCell().getRow();
   // This, for now, defaults to the top organization in "org_info"
   var org_values = orgSheet.getSheetValues(2, 1, 1, 3);
   // Get the values for the selected fact
-  var values = sheet.getSheetValues(row, 1, 1, 14);
+  // To add more values, increase this number
+  var values = sheet.getSheetValues(row, 1, 1, 15);
   
   // Create the widget from the "widget_template.html" file
   var t = HtmlService.createTemplateFromFile('widget_template');
@@ -60,6 +61,7 @@ function createWidget() {
   
   t.fact_date = Utilities.formatDate(date, 'EST', "EEEEEEE, MMMMMM '"+ordinal_day+"', yyyy");
   // "Sheet1" page, "SpeakerTitle" column
+  Logger.log(values);
   t.speaker_title = values[0][14]; 
   // "Sheet1" page, "SourceName" colum
   t.source_name = values[0][13]
