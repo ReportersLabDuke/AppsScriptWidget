@@ -21,7 +21,7 @@ function createWidget() {
   // This gets all the cells of the fact selected
   var row = sheet.getActiveCell().getRow();
   // This, for now, defaults to the top organization in "org_info"
-  var org_values = orgSheet.getSheetValues(2, 1, 1, 3);
+  var org_values = orgSheet.getSheetValues(2, 1, 1, 4);
   // Get the values for the selected fact
   // To add more values, increase this number
   var values = sheet.getSheetValues(row, 1, 1, 15);
@@ -40,6 +40,8 @@ function createWidget() {
   t.logo_image = org_values[0][1];
   // "org_info" page, "MaxRating" column
   t.max_rating = org_values[0][0];
+  // "org_info" page, "TwitterHandle" column
+  t.twitter_handle = org_values[0][4];
   // "Sheet1" page, "SpeakerImage" column
   t.speaker_image = values[0][5];
   // "Sheet1" page, "Statement" column  
@@ -99,7 +101,7 @@ function createWidget() {
   }
   
   // Get the shareable image for the sharing links
-  var share_object = getShareableImage(t.link, t.speaker, t.speaker_title, t.title, t.speaker_image, rating_image, t.org_url, t.logo_image, t.max_rating, rating_number, t.source_name, t.date);
+  var share_object = getShareableImage(t.link, t.speaker, t.speaker_title, t.title, t.speaker_image, rating_image, t.org_url, t.twitter_handle t.logo_image, t.max_rating, rating_number, t.source_name, t.date);
   t.shareable_image = share_object['image_url'];
   t.shareable_link = share_object['share_url'];
   
@@ -124,11 +126,11 @@ function testGetShareableImage(){
                     "Hillary Clinton", "Democratic Presidential Candidate", "Says Sen. Bernie Sanders has called President Barack Obama \"weak. He's called him a disappointment.\"",
                     "http://static.politifact.com.s3.amazonaws.com/politifact%2Fmugs%2Fclinton_mug.jpg",
                     "http://static.politifact.com.s3.amazonaws.com/rulings%2Ftom-halftrue.gif",
-                    "http://www.politifact.com", "http://static.politifact.com/mediapage/jpgs/politifact-logo-big.jpg",
+                    "http://www.politifact.com", "@politifact", "http://static.politifact.com/mediapage/jpgs/politifact-logo-big.jpg",
                     "6", "3", "PBS Democratic debate", "2016-2-14");
 }
 
-function getShareableImage(url, speaker, speaker_title, statement, speakerImage, ratingImage, org_url, logo_image, max_rating, rating_number, source_name, date_published){
+function getShareableImage(url, speaker, speaker_title, statement, speakerImage, ratingImage, org_url, twitter, logo_image, max_rating, rating_number, source_name, date_published){
   var current_date = new Date();
   
   var payload = {
@@ -138,7 +140,8 @@ function getShareableImage(url, speaker, speaker_title, statement, speakerImage,
       "url": url,
       "author": {
         "@type": "Organization",
-        "url": org_url
+        "url": org_url,
+        "twitter", t.twitter_handle
       },
       "claimReviewed": statement,
       "claimReviewSiteLogo": logo_image,
