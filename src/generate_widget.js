@@ -141,7 +141,7 @@ function getShareableImage(url, speaker, speaker_title, statement, speakerImage,
       "author": {
         "@type": "Organization",
         "url": org_url,
-        "twitter", t.twitter_handle
+        "twitter": twitter
       },
       "claimReviewed": statement,
       "claimReviewSiteLogo": logo_image,
