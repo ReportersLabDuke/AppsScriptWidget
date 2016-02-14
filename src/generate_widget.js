@@ -56,12 +56,13 @@ function createWidget() {
   // "Sheet1" page, "Date" column
   // Convert date to format 'Friday, September 21, 2015  
   var date = new Date(values[0][2]);
-  var ordinal_day = getOrdinal(date.getDay);
+  var ordinal_day = getOrdinal(date.getDay());
+  
   t.fact_date = Utilities.formatDate(date, 'EST', "EEEEEEE, MMMMMM '"+ordinal_day+"', yyyy");
   // "Sheet1" page, "SpeakerTitle" column
-  t.speaker_title = values[0][13]; 
+  t.speaker_title = values[0][12]; 
   // "Sheet1" page, "SourceName" colum
-  t.source_name = values[0][12]
+  t.source_name = values[0][13]
   // "Sheet1" page, "RatingText" column...twice
   rating_text = values[0][9]
   t.rating_text = values[0][9];
