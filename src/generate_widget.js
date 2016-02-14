@@ -101,7 +101,7 @@ function createWidget() {
   }
   
   // Get the shareable image for the sharing links
-  var share_object = getShareableImage(t.link, t.speaker, t.speaker_title, t.title, t.speaker_image, rating_image, t.org_url, t.twitter_handle t.logo_image, t.max_rating, rating_number, t.source_name, t.date);
+  var share_object = getShareableImage(t.link, t.speaker, t.speaker_title, t.title, t.speaker_image, rating_image, t.org_url, t.twitter_handle, t.logo_image, t.max_rating, rating_number, t.source_name, t.date);
   t.shareable_image = share_object['image_url'];
   t.shareable_link = share_object['share_url'];
   
