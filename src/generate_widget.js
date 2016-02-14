@@ -85,8 +85,9 @@ function createWidget() {
   // Organization image plus, if available, rating image.
   // Goes in the top right-hand corner.
   // TODO: use rating_description when no rating_image specified?
+  t.rating_summary = "help"
   if (rating_image != "") {
-    t.rating_summary = '<img src="' + rating_image + '"><img src="' + t.logo_image + '">';
+     t.rating_summary = '<img src="' + rating_image + '"><img src="' + t.logo_image + '">';
   } else if (rating_text != "") {
       t.rating_summary = '<b>Rating:</b> ' + rating_text + '<img src="' + t.logo_image + '">'
   }
