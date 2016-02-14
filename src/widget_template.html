@@ -419,9 +419,9 @@
     <li><a href="#factbox" onclick='toggleShareVisibility(this)'>Share</a></li>
     <li><a href="<?=link?>">Read more</a></li>
 	    <div class="share">
-          <div class="share-button facebook"><div class="share-label"><a href="javascript:facebookShare('<?=link?>', 'http://fact-reporter.herokuapp.com/cdfc777d-f831-47f0-bf7d-4a4c8bb42c40.png', 520, 350)"><i class="fa fa-facebook"></i></a></div></div>
+          <div class="share-button facebook"><div class="share-label"><a href="javascript:facebookShare('<?=shareable_link>', '<?=shareable_image?>', 520, 350)"><i class="fa fa-facebook"></i></a></div></div>
 
-          <div class="share-button twitter"><div class="share-label"><a href="javascript:twitterShare('<?=link?>', 520, 350)"><i class="fa fa-twitter"></i></a></div></div>
+          <div class="share-button twitter"><div class="share-label"><a href="javascript:twitterShare('<?=shareable_link>', 520, 350)"><i class="fa fa-twitter"></i></a></div></div>
 		  
 		  <div class="embed-button"><div class="embed-label"><a href="#factbox" onclick="toggleEmbedBox(this)">Embed</a></div></div>
           <textarea rows="4" cols="50" class="embed_box"></textarea>
