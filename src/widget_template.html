@@ -1,9 +1,13 @@
 <div class="factbox">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  
   <style>
 
   .factbox {
     font-family: 'Roboto', 'Helvetica', sans-serif;
-    font-color: rgba(0, 0, 0, 0.87);
+    color: rgba(0, 0, 0, 0.86);
+    font-weight: 400;
     margin: 0px;
     margin-top:40px;
     padding: 0;
@@ -22,14 +26,33 @@
     position: relative;
   }
 
-  .factbox .name img {
-    float:left;
-    padding:0px 32px 32px 0px;
-  }
-
   .factbox .name {
+    display: inline-block;
     height:64px;
     float:left;
+    margin-bottom: 32px;
+  }
+  
+  .factbox .name img {
+    display: inline-block;
+    float:left;
+    padding-bottom: 32px;
+    padding-right: 32px;
+  }
+  
+  .factbox .speaker{
+	float:left;
+	padding-top: 10px;
+  }
+  .factbox .speaker .speaker-name {
+	  font-weight: 500;
+	  font-size: 20px;
+	  padding-bottom: 8px;
+  }
+  
+  .factbox .speaker .speaker-title {
+	  color: rgba(0,0,0,0.54);
+	  font-size:12px;
   }
 
   .factbox .rating {
@@ -38,6 +61,7 @@
     width:120px;
     height:auto;
     display: inline;
+    max-height: 200px;
   }
 
   .factbox .rating img {
@@ -58,12 +82,18 @@
 
   .factbox p {
     text-indent: -0.35em;
-    margin-top: 86px;
-    /* clear: both; */
+    margin-top: 96px;
     width: 100%;
     display: block;
     font-size: 16px;
     line-height: 26px;
+  }
+  
+  .factbox .dateline {
+	  font-size: 12px;
+	  color: rgba(0,0,0,0.54);
+	  font-weight: 400;
+	  margin-top: 8px;
   }
 
   .factbox hr {
@@ -83,7 +113,7 @@
   }
 
   .factbox a:-webkit-any-link {
-    font-color: #2196f3;
+    color: #2196f3;
     text-decoration: none;
     cursor: pointer;
   }
@@ -137,10 +167,59 @@
 
   .factbox .menu .share { 
     display: none;
+    margin-top: 32px;
   }
-
+  
+  .factbox .menu .share .share-button {
+	  display: inline-block;
+	  height: 64px;
+	  width: 64px;
+	  position: relative;
+  }
+  .factbox .menu .share .share-button .share-label{
+	  position: absolute;
+	  top: 50%; left: 50%;
+	  transform: translate(-50%, -50%);
+	  color: white;
+  }
+  
+  .factbox .menu .share .facebook {
+	  background-color: rgb(64,94,145);
+  }
+  .factbox .menu .share .twitter {
+	  background-color: rgb(104,172,216);
+  }
+  .factbox .menu .share .google-plus {
+ 	  background-color: rgb(215,84,81);
+  }
+  
+  .factbox .menu .share .embed-button {
+ 	  display: inline-block;
+	  height: 64px;
+	  width: 275px;
+	  background: #ffffff;
+	  box-shadow: 0px 0px 2px 0px rgba(0,0,0,.12), 0px 2px 2px 0px rgba(0,0,0,.24);
+	  border-radius: 2px;
+	  font-weight: 500;
+	  font-size: 14px;
+	  color: #2196f3;
+	  letter-spacing: 0.5px;
+	  line-height: 16px;
+	  position: relative;
+	  margin-left: 24px;
+  }
+  
+  .factbox .menu .share .embed-button .embed-label {
+ 	  position: absolute;
+	  top: 50%; left: 50%;
+	  transform: translate(-50%, -50%);
+  }
+  
   .factbox .share .embed_box { 
     display: none;
+    height: 300px;
+    margin-top: 16px;
+    width: 100%;
   }
 
   .factbox .menu li {
@@ -172,7 +251,6 @@
   }
 
   .factbox a {
-    color: #2196f3;
   }
 
   @media screen and (max-width: 560px) {
@@ -184,7 +262,7 @@
       display: inline;
     }
     .factbox .name {
-      padding-bottom: 32px;
+      padding-bottom: 8px;
     }
     .factbox p {
     clear: left;
@@ -192,7 +270,7 @@
   }
 
   @media screen and (max-width: 460px) {
-    .factbox .rating {
+/*    .factbox .rating {
       padding-left: 24px;
       float: right;
       width: 90px;
@@ -201,15 +279,20 @@
     }
     .factbox .name {
       width: 100%;
-      padding-bottom: 32px;
+      padding-bottom: 12px;
     }
     .factbox p {
-      font-size: 13px;
-      line-height: 22px;
     }
+*/    
+    .factbox .menu .share .embed-button {
+	  margin-top: 24px;
+	  margin-left: 0px;
+	  width: 100%;
+	}
+
   }
 
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 364px) {
     .factbox {
       padding: 24px;
       display: block;
@@ -234,43 +317,43 @@
       height: 64px;
       float: left;
     }
+    
+    .factbox .name {
+	    padding-bottom: 8px;
+	    margin-bottom: 8px;
+    }
     .factbox .name img {
       float: left;
-      padding: 0px 24px 24px 0px;
     }
-    .factbox h1 {
-      display: inline-block;
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 1.35em;
-      -webkit-margin-before: .35em;
-      -webkit-margin-after: 0em;
-      -webkit-margin-start: 0px;
-      -webkit-margin-end: 0px;
-    }
+
     .factbox p {
-      font-size: 13px;
-      line-height: 20px;
+      font-size: 16px;
+      line-height: 24px;
     }
   }
   </style>
 
   <script>
-    function showEmbedBox(e) {
-      var factbox = e;
-      while (!factbox.classList.contains('factbox')) {
-        factbox = factbox.parentElement;
-      }
+    function toggleEmbedBox(e) {
+      var embed_box = e.parentElement.parentElement.parentElement.getElementsByClassName('embed_box')[0];
 
-      var container = document.createElement("div");
-      container.appendChild(factbox.cloneNode(true));
-      var embed_box = e.parentElement.getElementsByClassName('embed_box')[0];
-      embed_box.innerHTML = container.innerHTML;
-      embed_box.style.display = 'block';
+	  if(embed_box.style.display == 'block'){
+		  embed_box.style.display = 'none';
+	  } else {
+	      var factbox = e;
+	      while (!factbox.classList.contains('factbox')) {
+	        factbox = factbox.parentElement;
+	      }
+	
+	      var container = document.createElement("div");
+	      container.appendChild(factbox.cloneNode(true));
+	      embed_box.innerHTML = container.innerHTML;
+	      embed_box.style.display = 'block';
+	  }
     }
 
     function toggleShareVisibility(e) {
-      var e = e.parentElement.getElementsByClassName('share')[0];
+      var e = e.parentElement.parentElement.getElementsByClassName('share')[0];
       if (e.style.display === 'block') {
         e.style.display = 'none';
       } else {
@@ -282,57 +365,66 @@
 
   <div class="name">
     <img src="<?=speaker_image?>">
-    <h1><?=speaker?></h1>
+    <div class="speaker">
+	    <div class="speaker-name"><?=speaker?></div>
+		<div class="speaker-title"><?=speaker_title?></div>
+    </div>
   </div>
   <div class="rating">
-    <?!=rating_summary?>
+    <?=rating_summery?>  
   </div>
 
-  <p><?!=fact?></p>
- 
+  <p>
+    "<?!=fact?>
+  </p>
+  <div class="dateline">
+	  <?=source_name?> <?=fact_date?>
+  </div>
   <ul class="menu">
-    <li><a href="<?!=link?>">Read more</a></li>
-    <li><a href="#factbox" onclick='toggleShareVisibility(this)'>Share</a>
-      <ul class="share">
-          <li>
-              <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="<?!=link?>" data-a2a-title="<?=speaker?>">
-                  <a class="a2a_button_facebook"></a>
-                  <a class="a2a_button_twitter"></a>
-                  <a class="a2a_button_google_plus"></a>
-                  <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-              </div>
-          </li>
-        <li><a href="#factbox" onclick="showEmbedBox(this)">Embed</a><textarea rows="4" cols="50" class="embed_box"></textarea></li>
-      </ul>
-    </li>
+    <li><a href="#factbox" onclick='toggleShareVisibility(this)'>Share</a></li>
+    <li><a href="http://www.politifact.com/truth-o-meter/statements/2015/oct/29/carly-fiorina/fiorina-levies-out-date-charge-women-job-losses-un/">Read more</a></li>
+	    <div class="share">
+          <div class="share-button facebook"><div class="share-label"><a class="a2a_button_twitter"><i class="fa fa-facebook"></i></a></div></div>
+
+          <div class="share-button twitter"><div class="share-label"><a class="a2a_button_google_plus"><i class="fa fa-twitter"></i>
+</a></div></div>
+
+          <div class="share-button google-plus"><div class="share-label"><a class="a2a_dd"><i class="fa fa-google-plus"></i>
+</a></div></div>
+		  
+		  <div class="embed-button"><div class="embed-label"><a href="#factbox" onclick="toggleEmbedBox(this)">Embed</a></div></div>
+          <textarea rows="4" cols="50" class="embed_box"></textarea>
+
+      </div>
   </ul>
 
-  <script type="<?!=stype?>">
+  <script type="application/ld&#43;json">
   {
   "@context": "http://schema.org",
   "@type":"Review",
+
   "additionalType":"ClaimReview",
-  "datePublished": "<?!=date?>", 
-  "url": "<?!=link?>",
+  "datePublished": "Thu Oct 29 2015 00:00:00 GMT-0700 (PDT)", 
+  "url": "http://www.politifact.com/truth-o-meter/statements/2015/oct/29/carly-fiorina/fiorina-levies-out-date-charge-women-job-losses-un/",
   "author": { 
   "@type": "Organization", 
-  "url": "<?!=org_url?>" 
+  "url": "http://www.politifact.com/" 
   },
-  "claimReviewed": "<?!=fact?>",
-  "claimReviewSiteLogo": "<?!=logo_image?>",
+  "claimReviewed": ""92 percent of the jobs lost during Barack Obama’s first term belonged to women."",
+  "claimReviewSiteLogo": "http://static.politifact.com/mediapage/jpgs/politifact-logo-big.jpg",
   "reviewRating": {
   "@type": "Rating",
-  "ratingValue": <?=rating_num?>,
-  "bestRating": <?=max_rating?>,
+  "ratingValue": '1',
+  "bestRating": '5',
   },
   "itemReviewed": {
   "@type": "CreativeWork",
   "author": {
   "@type": "Person",
-  "name": "<?=speaker?>",
-  "image": "<?!=speaker_image?>",
-  "sameAs": "<?!=speaker_context?>",
-  "datePublished": "<?!=fact_date?>"
+  "name": "Carly Fiorina",
+  "image": "http://static.politifact.com.s3.amazonaws.com/politifact%2Fmugs%2FFiorina_1.jpg",
+  "sameAs": "https://en.wikipedia.org/wiki/Carly_Fiorina",
+  "datePublished": "Wed Oct 28 2015 00:00:00 GMT-0700 (PDT)"
   }
   }
   </script>

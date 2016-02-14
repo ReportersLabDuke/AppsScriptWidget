@@ -30,6 +30,9 @@ function createWidget() {
   // No idea what this is
   t.stype = 'application/ld+json';
   
+  // TODO: put these in order, so we can easily add fields without
+  // screwing up the column numbers. 
+  
   // "org_info" page, "OrgURL" column
   t.org_url = org_values[0][2];
   // "org_info" page, "LogoImage" column
@@ -50,8 +53,15 @@ function createWidget() {
   t.date = values[0][12];
   // "Sheet1" page, "Statement" column (again?)  
   t.fact = values[0][1];
-  // "Sheet1" page, "Date" column  
-  t.fact_date = values[0][2];
+  // "Sheet1" page, "Date" column
+  // Convert date to format 'Friday, September 21, 2015  
+  var date = new Date(values[0][2]);
+  var ordinal_day = getOrdinal(date.getDay);
+  t.fact_date = Utilities.formatDate(date, 'EST', "EEEEEEE, MMMMMM '"+ordinal_day+"', yyyy");
+  // "Sheet1" page, "SpeakerTitle" column
+  t.speaker_title = values[0][13]; 
+  // "Sheet1" page, "SourceName" colum
+  t.source_name = values[0][12]
   // "Sheet1" page, "RatingText" column...twice
   rating_text = values[0][9]
   t.rating_text = values[0][9];
@@ -158,4 +168,12 @@ function getShareableImage(speaker, statement, speakerImage, ratingImage){
   Logger.log(responseText);
 
   return JSON.parse(response.getContentText());
+}
+
+// found here http://forums.shopify.com/categories/2/posts/29259
+
+var getOrdinal = function(n) {
+   var s=["th","st","nd","rd"],
+       v=n%100;
+   return n+(s[(v-20)%10]||s[v]||s[0]);
 }
