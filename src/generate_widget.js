@@ -66,14 +66,14 @@ function createWidget() {
   // "Sheet1" page, "SourceName" colum
   t.source_name = values[0][13]
   // "Sheet1" page, "RatingText" column...twice
-  rating_text = values[0][9]
+  var rating_text = values[0][9]
   t.rating_text = values[0][9];
   // "Sheet1" page, "RatingDescription" column  
-  rating_description = values[0][8];
+  var rating_description = values[0][8];
   // "Sheet1" page, "RatingImage" column    
-  rating_image = values[0][10];
+  var rating_image = values[0][10];
   // "Sheet1" page, "Rating" column    
-  rating_number = values[0][7];
+  var rating_number = values[0][7];
   
   // Check to make sure the rating is not higher than the most allowed
   // by the organization
@@ -99,12 +99,12 @@ function createWidget() {
   }
   
   // Get the shareable image for the sharing links
-  var share_object = getShareableImage(t.speaker, t.title, t.speaker_image, rating_image).image_url;
+  var share_object = getShareableImage(t.link, t.speaker, t.speaker_title, t.title, t.speaker_image, rating_image, t.org_url, t.logo_image, t.max_rating, rating_number, t.source_name, t.date);
   t.shareable_image = share_object['image_url'];
   t.shareable_link = share_object['share_url'];
   
   // Get the final HTML
-  output = t.evaluate().getContent();
+  var output = t.evaluate().getContent();
   
   // Make the box to show the code for embedding
   var html = HtmlService.createTemplateFromFile('menu_template');
@@ -129,20 +129,6 @@ function testGetShareableImage(){
 }
 
 function getShareableImage(url, speaker, speaker_title, statement, speakerImage, ratingImage, org_url, logo_image, max_rating, rating_number, source_name, date_published){
-  var encodedURL = encodeURIComponent(url);
-  var encodedSpeaker = encodeURIComponent(speaker);
-  var endodedSpeakerTitle = encodeURIComponent(speaker_title);
-  var encodedStatement = encodeURIComponent(statement);
-  var encodedSpeakerImage = encodeURIComponent(speakerImage);
-  var encodedRatingImage = encodeURIComponent(ratingImage);
-  var encodedLogoImage = encodeURIComponent(logo_image);
-  var endodedMaxRating = encodeURIComponent(max_rating);
-  var endodedRatingNumber = encodeURIComponent(rating_number);
-  var endodedMaxRating = encodeURIComponent(max_rating);
-  var endodedOrgURL = encodeURIComponent(org_url);
-  var encodedSourceName = encodeURIComponent(source_name);  
-  var endodedDatePublished = encodeURIComponent(date_published);
-  
   var current_date = new Date();
   
   var payload = {
@@ -179,15 +165,15 @@ function getShareableImage(url, speaker, speaker_title, statement, speakerImage,
       }
     }
 
-  var url = "https://fact-reporter.herokuapp.com/generate";
+  var requestURL = "https://fact-reporter.herokuapp.com/generate";
   var options = {
     "method": "post",
     "payload": JSON.stringify(payload)
   }
   //Logger.log(JSON.stringify(payload));
 
-  var response = UrlFetchApp.fetch(url, options);
-  var responseText = response.getContentText();
+  var response = UrlFetchApp.fetch(requestURL, options);
+  //var responseText = response.getContentText();
   //Logger.log(responseText);
 
   return JSON.parse(response.getContentText());
