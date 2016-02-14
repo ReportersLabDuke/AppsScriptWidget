@@ -99,8 +99,10 @@ function createWidget() {
   }
   
   // Get the shareable image for the sharing links
-  //t.shareable_image = getShareableImage(t.speaker, t.title, t.speaker_image, rating_image).image_url;
-
+  var share_object = getShareableImage(t.speaker, t.title, t.speaker_image, rating_image).image_url;
+  t.shareable_image = share_object['image_url'];
+  t.shareable_link = share_object['share_url'];
+  
   // Get the final HTML
   output = t.evaluate().getContent();
   
@@ -118,58 +120,75 @@ function createWidget() {
 }
 
 function testGetShareableImage(){
-  getShareableImage("Martin O'Malley", "this is a \"fake\" test", "http://static.politifact.com.s3.amazonaws.com/politifact%2Fmugs%2Ftrump_1.jpg", "http://static.politifact.com.s3.amazonaws.com/rulings%2Ftom-pantsonfire.gif");
+  getShareableImage("http://www.politifact.com/truth-o-meter/statements/2016/feb/12/hillary-clinton/did-bernie-sanders-call-president-barack-obama-wea/",
+                    "Hillary Clinton", "Democratic Presidential Candidate", "Says Sen. Bernie Sanders has called President Barack Obama \"weak. He's called him a disappointment.\"",
+                    "http://static.politifact.com.s3.amazonaws.com/politifact%2Fmugs%2Fclinton_mug.jpg",
+                    "http://static.politifact.com.s3.amazonaws.com/rulings%2Ftom-halftrue.gif",
+                    "http://www.politifact.com", "http://static.politifact.com/mediapage/jpgs/politifact-logo-big.jpg",
+                    "6", "3", "PBS Democratic debate", "2016-2-14");
 }
 
-function getShareableImage(speaker, statement, speakerImage, ratingImage){
+function getShareableImage(url, speaker, speaker_title, statement, speakerImage, ratingImage, org_url, logo_image, max_rating, rating_number, source_name, date_published){
+  var encodedURL = encodeURIComponent(url);
   var encodedSpeaker = encodeURIComponent(speaker);
+  var endodedSpeakerTitle = encodeURIComponent(speaker_title);
   var encodedStatement = encodeURIComponent(statement);
   var encodedSpeakerImage = encodeURIComponent(speakerImage);
   var encodedRatingImage = encodeURIComponent(ratingImage);
+  var encodedLogoImage = encodeURIComponent(logo_image);
+  var endodedMaxRating = encodeURIComponent(max_rating);
+  var endodedRatingNumber = encodeURIComponent(rating_number);
+  var endodedMaxRating = encodeURIComponent(max_rating);
+  var endodedOrgURL = encodeURIComponent(org_url);
+  var encodedSourceName = encodeURIComponent(source_name);  
+  var endodedDatePublished = encodeURIComponent(date_published);
+  
+  var current_date = new Date();
   
   var payload = {
       "@context": "http://schema.org",
       "@type": ["Review", "ClaimReview"],
-      "datePublished": "2014-07-23",
-      "url": "http://www.politifact.com/texas/statements/2014/jul/23/rick-perry/rick-perry-claim-about-3000-homicides-illegal-immi/",
+      "datePublished": current_date.getYear() + "-" + current_date.getMonth() + "-" + current_date.getDay()+1,
+      "url": url,
       "author": {
         "@type": "Organization",
-        "url": "http://www.politifact.com/"
+        "url": org_url
       },
-      "claimReviewed": "More than 3,000 homicides were committed by \"illegal aliens\" over the past six years.",
-      "claimReviewSiteLogo": "http://static.politifact.com/mediapage/jpgs/politifact-logo-big.jpg",
+      "claimReviewed": statement,
+      "claimReviewSiteLogo": logo_image,
       "reviewRating": {
         "@type": "Rating",
-        "ratingValue": 1,
-        "bestRating": 6,
-        "image": "http://static.politifact.com.s3.amazonaws.com/rulings/tom-pantsonfire.gif"
+        "ratingValue": rating_number,
+        "bestRating": max_rating,
+        "image": ratingImage
       },
       "itemReviewed": {
         "@type": "CreativeWork",
         "author": {
           "@type": "Person",
-          "name": "Rich Perry",
-          "title": "Former Governor of Texas",
-          "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Gov._Perry_CPAC_February_2015.jpg/440px-Gov._Perry_CPAC_February_2015.jpg",
+          "name": speaker,
+          "title": speaker_title,
+          "image": speakerImage,
           "sameAs": [
             "https://en.wikipedia.org/wiki/Rick_Perry",
             "https://rickperry.org/"
           ]
         },
-        "datePublished": "2014-07-17",
-        "sourceName": "The St. Petersburg Times"
+        "datePublished": date_published,
+        "sourceName": source_name
       }
     }
-  
+
   var url = "https://fact-reporter.herokuapp.com/generate";
   var options = {
     "method": "post",
     "payload": JSON.stringify(payload)
   }
-  
+  //Logger.log(JSON.stringify(payload));
+
   var response = UrlFetchApp.fetch(url, options);
   var responseText = response.getContentText();
-  Logger.log(responseText);
+  //Logger.log(responseText);
 
   return JSON.parse(response.getContentText());
 }
