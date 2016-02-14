@@ -60,7 +60,7 @@ function createWidget() {
   
   t.fact_date = Utilities.formatDate(date, 'EST', "EEEEEEE, MMMMMM '"+ordinal_day+"', yyyy");
   // "Sheet1" page, "SpeakerTitle" column
-  t.speaker_title = values[0][12]; 
+  t.speaker_title = values[0][14]; 
   // "Sheet1" page, "SourceName" colum
   t.source_name = values[0][13]
   // "Sheet1" page, "RatingText" column...twice
