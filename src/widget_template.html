@@ -222,6 +222,15 @@
 	  transform: translate(-50%, -50%);
   }
   
+  .factbox .menu .share .embed-button .embed-label a {
+	  text-decoration: none;
+  }
+  
+  .factbox .menu .share .embed-button .embed-label a:visited {
+  	  color: #2196f3;
+  }
+
+  
   .factbox .share .embed_box { 
     display: none;
     height: 300px;
@@ -332,6 +341,10 @@
     .factbox .name img {
       float: left;
     }
+    
+    .factbox .speaker .speaker-title {
+  	  font-size: 9px;
+    }
 
     .factbox p {
       font-size: 16px;
@@ -368,14 +381,22 @@
       }
     }
     
-    function fbShare(url, picture, winWidth, winHeight) {
+    //adopted from https://jsfiddle.net/stichoza/eyxtj/
+    function facebookShare(url, picture, winWidth, winHeight) {
+      openShare('http://www.facebook.com/sharer.php?app_id=612033658951055&u=' + url + '&picture=' + picture, winWidth, winHeight);
+    }
+    
+    function twitterShare(url, widWidth, winHeight){
+      openShare('https://twitter.com/intent/tweet?url=' + url, winWidth, winHeight);
+    }
+    
+    function openShare(url, winWidth, winHeight){
       var winTop = (screen.height / 2) - (winHeight / 2);
       var winLeft = (screen.width / 2) - (winWidth / 2);
       window.open('http://www.facebook.com/sharer.php?app_id=612033658951055&u=' + url + '&picture=' + picture, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
     }
 
   </script>
-  <script async src="//static.addtoany.com/menu/page.js"></script>
 
   <div class="name">
     <img src="<?=speaker_image?>">
@@ -400,7 +421,7 @@
 	    <div class="share">
           <div class="share-button facebook"><div class="share-label"><a href="javascript:fbShare('<?=link?>', 'http://fact-reporter.herokuapp.com/cdfc777d-f831-47f0-bf7d-4a4c8bb42c40.png', 520, 350)"><i class="fa fa-facebook"></i></a></div></div>
 
-          <div class="share-button twitter"><div class="share-label"><a class="a2a_button_google_plus"><i class="fa fa-twitter"></i>
+          <div class="share-button twitter"><div class="share-label"><a href="javascript:fbShare('<?=link?>', 520, 350)"><i class="fa fa-twitter"></i>
 </a></div></div>
 
           <div class="share-button google-plus"><div class="share-label"><a class="a2a_dd"><i class="fa fa-google-plus"></i>
